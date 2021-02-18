@@ -1,0 +1,29 @@
+#!/bin/bash
+if [ $# -ne 2 ] || [ "$1" != "-c" ] ; then
+  echo "interactive login not permitted"
+  exit 1
+fi
+
+REAL_ARGV=($SSH_ORIGINAL_COMMAND)
+if [ ${#REAL_ARGV[@]} -eq 0 ]; then
+  echo "interactive login not permitted"
+  exit 1
+fi
+if [ ${#REAL_ARGV[@]} -lt 2 ]; then
+  echo "incorrect number of parameters"
+  exit 1
+fi
+
+ARGV=($2)
+# strip gitea binary path from array
+_REAL_GITEA="${ARGV[0]}"
+ARGV=("${ARGV[@]:1}")
+case "${REAL_ARGV[0]}" in
+  ( git-upload-pack | git-receive-pack )
+    ;; # continue execution
+  ( * )
+    printf "command not allowed\n"
+    exit 1
+    ;;
+esac
+REAL_GITEA=$_REAL_GITEA /opt/gitea/gitea ${ARGV[@]}
