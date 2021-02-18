@@ -41,7 +41,10 @@ environment:
 
 - More notes can be found at [here](https://docs.gitea.io/en-us/install-with-docker/#ssh-container-passthrough).
 
-- If there were problems with pull/push regarding `git-receive-pack` and `git-upload-pack`, permissions or ..., just run "Resynchronize pre-receive, update and post-receive hooks of all repositories", "Update the '.ssh/authorized_keys' file with Gitea SSH keys" and "Update the '.ssh/authorized_principals' file with Gitea SSH principals".
+- If there were problems with pull/push regarding `git-receive-pack` and `git-upload-pack`, permissions or ..., just run these administrative tasks:
+  - "Resynchronize pre-receive, update and post-receive hooks of all repositories"
+  - "Update the '.ssh/authorized_keys' file with Gitea SSH keys"
+  - "Update the '.ssh/authorized_principals' file with Gitea SSH principals"
 
 ## License
 
